@@ -14,7 +14,7 @@
   * Eileen Yao     - gaudea
  
 ## Datasets
- ==================================
+
   * US Census - this would be alongside two other ones since it's small, but could help in terms of locations and demos
   * [500 Cities: Local Data for Better Health] (https://catalog.data.gov/dataset/500-cities-local-data-for-better-health-b32fd)
     * This dataset has 10k+ tuples and about 20 features
@@ -25,7 +25,7 @@
     * Similar pro's to 500 cities
     
 ## Planned Joins 
-=======================
+
 The datasets have the following common attributes for joins:
  * State
  * Country aggregate
