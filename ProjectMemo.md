@@ -4,7 +4,7 @@
  * Datasets (2) planned on using:
    * Location of data
    * Licensing Information
-   * How we will joining the datasets
+   * How we will join the datasets
 
 
  ## Group Members
