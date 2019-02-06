@@ -1,5 +1,5 @@
 # Database Systems Final Project Memo
-## Requirements:
+## Requirements
  * Names
  * Datasets (2) planned on using:
    * Location of data
@@ -7,14 +7,13 @@
    * How we will join the datasets
 
 
- ## Group Members
+## Group Members
   * Jose Figueroa  - figuej3
   * Matthew Garber - garbem4
   * Andrew Gaudet  - gaudea
   * Eileen Yao     - yaoe
  
 ## Datasets
-
   * US Census - this would be alongside two other ones since it's small, but could help in terms of locations and demos
   * [500 Cities: Local Data for Better Health](https://catalog.data.gov/dataset/500-cities-local-data-for-better-health-b32fd)
     * This dataset has 10k+ tuples and about 20 features
