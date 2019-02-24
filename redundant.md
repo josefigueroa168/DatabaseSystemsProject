@@ -53,18 +53,59 @@
   - 2014
   - 2015
   - 2016
-* Location - Location Description
- - 50 States
- - Regiones (West, Midwest etc)
+* Location - Location Description - Geolocation(For states and Colonies) - LocationID
+  - 50 States
+  - Regions (West, Midwest etc)
+  - Colonies
+* Topic - Question - TopicsID - QuestionID
+  - 22 different topics, may be subsets of class
+* Data_Value - DataValueTypeId - Data\_Value\_Type
+  - %
+  - Number
+* Data\_Value\_Footnote - Data\_Value\_FootnoteSymbol
+  - ~ - No Data Available
+  - \# - Fewer than 50 states
+  - & - Regional estimates may not represent all states in the region
+* Class - ClassID
+  - Mental Health
+  - Nutrition/Physical Activity/Obesity
+  - Overall Health
+  - Screening and Vaccines
+  - Smoking and Alcohol Use
+* Stratification1 - StratificationID1
+  - 50-54
+  - 55-59
+  - 60-64
+  - 65+
 * **DataSource**
- - BRFSS All the same, can ignore
-* Class
- - Mental Health
- - Nutrition/Physical Activity/Obesity
- - Overall Health
- - Screening and Vaccines
- - Smoking and Alcohol Use
-* Topic
- - 22 different topics, may be subsets of class
+  - BRFSS All the same, can ignore
+* **Response - ResponseID**
+  - Blank
+* Data_Value
+  - Somewhat Unique
+* Low Confidence Limit (Data)
+  - Somewhat Unique
+* High Confidence Limit (Data)
+  - Somewhat Unique
+* **SampleSize**
+  - Blank
+* **StratificationCategory1 - StatificationID**
+  - Always Age Group
+* StratificationCategory2 - StratificationCategotyID2
+  - Gender
+  - Race/Ethnicity
+  - Blank
+- StratificationID2
+  - ASN
+  - BLK
+  - HIS
+  - MALE
+  - FEMALE
+  - WHT
+  - NAA
+* **Strat3/Strat3Category**
+  - Blank
+ 
+
 
 # Schema 
