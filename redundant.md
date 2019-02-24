@@ -2,9 +2,9 @@
 
 ## 500_Cities
 * Category - CategoryID:
- - Prevention
- - Health Outcomes
- - Unhealthy Behaviors
+  - Prevention
+  - Health Outcomes
+  - Unhealthy Behaviors
 * StateAbbr - StateDesc:
  - US + 50 States
 * Measures - Short_Question_Text - measureid:
