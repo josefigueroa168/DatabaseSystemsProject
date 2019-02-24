@@ -45,4 +45,26 @@
 * TractFIPS
   - Subset of City FPS, the 2 uniquely produce survey population
 
+## Healthy Aging
+* YearStart - YearEnd
+  - 2011
+  - 2012
+  - 2013
+  - 2014
+  - 2015
+  - 2016
+* Location - Location Description
+ - 50 States
+ - Regiones (West, Midwest etc)
+* **DataSource**
+ - BRFSS All the same, can ignore
+* Class
+ - Mental Health
+ - Nutrition/Physical Activity/Obesity
+ - Overall Health
+ - Screening and Vaccines
+ - Smoking and Alcohol Use
+* Topic
+ - 22 different topics, may be subsets of class
+
 # Schema 
