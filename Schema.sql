@@ -48,6 +48,7 @@ CREATE TABLE master(
 	state varchar(2),
 	city varchar(255),
 	questionID varchar(255),
+	data_type varchar(3),
 	low_con double precision,
 	high_con double precision,
 	average, double precision
