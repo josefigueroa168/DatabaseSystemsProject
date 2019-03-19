@@ -6,49 +6,50 @@ CREATE TABLE state_health(
 );
 
 CREATE TABLE city_state(
-	cityID bigint
-	city, varchar(255),
+	cityID bigint PRIMARY KEY,
+	city varchar(255),
 	state varchar(2)
 );
 
 CREATE TABLE state(
-	stateAbbr varchar(2),
+	stateAbbr varchar(2) PRIMARY KEY,
 	stateName varchar(255)
 );
 
 CREATE TABLE census(
 	year bigint,
-	state varchar(2),
-	population bigint
+	state varchar(2) ,
+	population bigint,
+	PRIMARY KEY(year, state)
 );
 
 CREATE TABLE answer_confidence(
-	questionID varchar(255),
+	questionID varchar(255) PRIMARY KEY,
 	low_con int,
 	high_con int,
 	value int
 );
 
 CREATE TABLE survey_catagories(
-	catagoryID varchar(255),
+	catagoryID varchar(255) PRIMARY KEY,
 	catagory varchar(255),
 	survey varchar(255)
 );
 
 CREATE TABLE question_data(
-	questionID varchar(255),
+	questionID varchar(255) PRIMARY KEY,
 	question varchar(255),
 	value bigint
 	topic varchar(255)
 );
 
 CREATE TABLE master(
-	surveyID serial,
-	year bigint,
-	state varchar(2),
-	city varchar(255),
-	questionID varchar(255),
-	data_type varchar(3),
+	surveyID serial PRIMARY KEY,
+	year int,
+	state char(2) REFERENCES state(stateAbbr),
+	cityID bigInt REFERENCES city_state(cityID),
+	questionID varchar(255) REFERENCES question_data(questionID),
+	data_type char(3),
 	low_con double precision,
 	high_con double precision,
 	average, double precision
