@@ -1,3 +1,13 @@
+DROP TABLE IF EXISTS state_health CASCADE;
+DROP TABLE IF EXISTS city_state CASCADE;
+DROP TABLE IF EXISTS state CASCADE;
+DROP TABLE IF EXISTS census CASCADE;
+DROP TABLE IF EXISTS answer_confidence CASCADE;
+DROP TABLE IF EXISTS survey_categories CASCADE;
+DROP TABLE IF EXISTS question_data CASCADE;
+DROP TABLE IF EXISTS master CASCADE;
+
+
 CREATE TABLE state_health(
 	year bigint,
 	disability_type varchar(255),

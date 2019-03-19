@@ -4,12 +4,13 @@ import psycopg2
 import psycopg2.extras
 
 
-conn_string = "host='localhost' dbname='postgres' user='postgres' password='postgres'"
+conn_string = "host='localhost' dbname='health' user='health' password='health'"
 
 conn = psycopg2.connect(conn_string)
 cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 conn.autocommit = True
 
+'''
 cursor.execute("DROP DATABASE IF EXISTS health;")
 cursor.execute("CREATE DATABASE health;")
 
@@ -17,7 +18,7 @@ cursor.execute("DROP USER IF EXISTS health;")
 cursor.execute("CREATE USER health WITH PASSWORD 'health';")
 
 cursor.execute("GRANT ALL PRIVILEGES ON DATABASE health TO health;")
-
+'''
 cursor.execute(open("Schema.sql", "r").read())
 
 conn.autocommit = False
