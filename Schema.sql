@@ -21,6 +21,7 @@ CREATE TABLE city_state(
 	state varchar(2)
 );
 
+-- Parsed --
 CREATE TABLE state(
 	stateAbbr varchar(2) PRIMARY KEY,
 	stateName varchar(255)
