@@ -30,7 +30,7 @@ CREATE TABLE answer_confidence(
 	value int
 );
 
-CREATE TABLE survey_catagories(
+CREATE TABLE survey_categories(
 	ID varchar(255) PRIMARY KEY,
 	catagory varchar(255)
 );
@@ -38,7 +38,7 @@ CREATE TABLE survey_catagories(
 CREATE TABLE question_data(
 	questionID varchar(255) PRIMARY KEY,
 	question varchar(255),
-	categoryID varChar(255) REFERENCES survey_categories(ID)
+	categoryID varChar(255) REFERENCES survey_categories(ID),
 	topic varchar(255)
 );
 
@@ -51,6 +51,6 @@ CREATE TABLE master(
 	data_type char(3),
 	low_con double precision,
 	high_con double precision,
-	average, double precision
+	average double precision,
 	locationBool boolean
 );
