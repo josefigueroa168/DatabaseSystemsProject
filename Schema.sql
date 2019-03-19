@@ -31,15 +31,14 @@ CREATE TABLE answer_confidence(
 );
 
 CREATE TABLE survey_catagories(
-	catagoryID varchar(255) PRIMARY KEY,
-	catagory varchar(255),
-	survey varchar(255)
+	ID varchar(255) PRIMARY KEY,
+	catagory varchar(255)
 );
 
 CREATE TABLE question_data(
 	questionID varchar(255) PRIMARY KEY,
 	question varchar(255),
-	value bigint
+	categoryID varChar(255) REFERENCES survey_categories(ID)
 	topic varchar(255)
 );
 
