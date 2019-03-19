@@ -4,18 +4,24 @@ import psycopg2
 import psycopg2.extras
 
 def insertStates(cursor, conn):
-    with open('states.csv') as csv_file:
+    state_set = set()
+    with open('500_Cities__Local_Data_for_Better_Health__2018_release.csv') as csv_file:
         csv_reader = csv.reader(csv_file)
         line_count = 0
         for row in csv_reader:
             if line_count == 0:
                 line_count += 1
+                continue
+            if row[1] == 'US':
+                continue
             else:
-                state = row[0]
                 abbr = row[1]
-                sql = "insert into state VALUES('{}', '{}');".format(abbr, state)
-                cursor.execute(sql)
+                state_name = row[2]
+                state_set.add((abbr, state_name))
 
+    for (abbr, state_name) in state_set:
+        sql = "insert into state VALUES('{}', '{}');".format(abbr, state_name)
+        cursor.execute(sql)
     conn.commit()
 
 conn_string = "host='localhost' dbname='health' user='health' password='health'"
