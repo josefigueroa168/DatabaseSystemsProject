@@ -4,9 +4,7 @@ import psycopg2
 import psycopg2.extras
 
 
-#conn_string = "host='localhost' dbname='baseball' user='baseball' password='baseball'"
-conn_string = "host='localhost' dbname='baseball' user='josefigueroa' password=''"
-
+conn_string = "host='localhost' dbname='baseball' user='baseball' password='baseball'"
 
 conn = psycopg2.connect(conn_string)
 cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
