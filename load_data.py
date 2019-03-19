@@ -1,9 +1,11 @@
 import csv
+import pandas as pd
 import psycopg2
 import psycopg2.extras
 
 
-conn_string = "host='localhost' dbname='baseball' user='postgres' password='postgres'"
+#conn_string = "host='localhost' dbname='baseball' user='baseball' password='baseball'"
+conn_string = "host='localhost' dbname='baseball' user='josefigueroa' password=''"
 
 
 conn = psycopg2.connect(conn_string)
@@ -21,7 +23,7 @@ cursor.execute("GRANT ALL PRIVILEGES ON DATABASE health TO health;")
 conn.autocommit = False
 
 with open('Healthy_Aging_Data.csv') as csv_file:
-    csv_reader = csv.reader(csv_file, delimiter=',')
+    csv_reader = csv.reader(csv_file)
     line_count = 0
     for row in csv_reader:
         if line_count == 0:
@@ -34,5 +36,13 @@ with open('Healthy_Aging_Data.csv') as csv_file:
             question = row[7]
             answer = row[12]
             line_count += 1
+
+with open('500_Cities__Local_Data_for_Better_Health__2018_release.csv') as csv_file:
+    cities_df = pd.read_csv(csv_file, usecols=['Year','StateDesc', 'StateAbbr','CityName', 'CityFIPS','PopulationCount','Category','CategoryID', 'MeasureId', 'Measure','Short_Question_Text'  ])
+    #Insert to state column
+    state = cities_df.loc[:,['StateAbbr','StateDesc']].drop_duplicates('StateAbbr')
+    #Insert to cities.. so on. Should clean US dates.
+    city_state = cities_df.loc[:, ['CityFIPS', 'CityName', 'StateAbbr']].drop_duplicates('CityFIPS')
+    
 
 cursor.close()
