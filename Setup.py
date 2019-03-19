@@ -1,7 +1,7 @@
 import psycopg2
 import psycopg2.extras
 
-conn_string = "host='localhost' dbname='baseball' user='postgres' password='postgres'"
+conn_string = "host='localhost' dbname='postgres' user='postgres' password='postgres'"
 
 conn = psycopg2.connect(conn_string)
 cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
