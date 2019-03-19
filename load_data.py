@@ -3,20 +3,34 @@ import pandas as pd
 import psycopg2
 import psycopg2.extras
 
+def insertStates(cursor, conn):
+    state_set = set()
+    with open('500_Cities__Local_Data_for_Better_Health__2018_release.csv') as csv_file:
+        csv_reader = csv.reader(csv_file)
+        line_count = 0
+        for row in csv_reader:
+            if line_count == 0:
+                line_count += 1
+                continue
+            if row[1] == 'US':
+                continue
+            else:
+                abbr = row[1]
+                state_name = row[2]
+                state_set.add((abbr, state_name))
 
-conn_string = "host='localhost' dbname='baseball' user='baseball' password='baseball'"
+    for (abbr, state_name) in state_set:
+        sql = "insert into state VALUES('{}', '{}');".format(abbr, state_name)
+        cursor.execute(sql)
+    conn.commit()
+
+conn_string = "host='localhost' dbname='health' user='health' password='health'"
 
 conn = psycopg2.connect(conn_string)
 cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 conn.autocommit = True
 
-cursor.execute("DROP DATABASE IF EXISTS health;")
-cursor.execute("CREATE DATABASE health;")
-
-cursor.execute("DROP USER IF EXISTS health;")
-cursor.execute("CREATE USER health WITH PASSWORD 'health';")
-
-cursor.execute("GRANT ALL PRIVILEGES ON DATABASE health TO health;")
+cursor.execute(open("Schema.sql", "r").read())
 
 conn.autocommit = False
 
@@ -35,6 +49,7 @@ with open('Healthy_Aging_Data.csv') as csv_file:
             answer = row[12]
             line_count += 1
 
+'''
 with open('500_Cities__Local_Data_for_Better_Health__2018_release.csv') as csv_file:
     cities_df = pd.read_csv(csv_file, usecols=['Year','StateDesc', 'StateAbbr','CityName', 'CityFIPS','PopulationCount','Category','CategoryID', 'MeasureId', 'Measure','Short_Question_Text'  ])
     #Insert to state column
@@ -45,5 +60,8 @@ with open('500_Cities__Local_Data_for_Better_Health__2018_release.csv') as csv_f
 for index, row in state.itertuples():
     cursor.execute("INSERT INTO TABLE state (stateAbbr, stateName)
     VALUES ('{0}', '{1}')".format(row['StateAbbr'], row['StateDesc']))
+'''
+insertStates(cursor, conn)
+
 
 cursor.close()
