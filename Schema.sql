@@ -11,14 +11,14 @@ DROP TABLE IF EXISTS master CASCADE;
 CREATE TABLE state_health(
 	year bigint,
 	disability_type varchar(255),
-	state varchar(2),
+	state char(2),
 	age_group varchar(255)
 );
 
 CREATE TABLE city_state(
 	cityID bigint PRIMARY KEY,
 	city varchar(255),
-	state varchar(2)
+	state char(2)
 );
 
 -- Parsed --
@@ -29,7 +29,7 @@ CREATE TABLE state(
 
 CREATE TABLE census(
 	year bigint,
-	state varchar(2) ,
+	state char(2) ,
 	population bigint,
 	PRIMARY KEY(year, state)
 );
@@ -43,7 +43,7 @@ CREATE TABLE answer_confidence(
 
 CREATE TABLE survey_categories(
 	ID varchar(255) PRIMARY KEY,
-	catagory varchar(255)
+	category varchar(255)
 );
 
 CREATE TABLE question_data(
