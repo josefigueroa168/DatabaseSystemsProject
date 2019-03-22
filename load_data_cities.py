@@ -14,6 +14,7 @@ import psycopg2
 import psycopg2.extras
 from psycopg2 import IntegrityError
 import argparse
+from progress.bar import Bar
 
 
 #Setup of command line interactions
@@ -119,18 +120,20 @@ with open(args.csv) as csv_file:
     print('question_data insertions complete.')
     
     iterations = 0
-    for index, row in cities_df.iterrows():
-        sql = """INSERT INTO master
-        (year, state, cityID, questionID, data_type, low_con, high_con, average) 
-        VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}')
-        """.format(row['Year'],  row['StateAbbr'], row['CityFIPS'], 
-        row['MeasureId'],  row['Data_Value_Type'], row['Low_Confidence_Limit'], row['High_Confidence_Limit'], 
-        row['Data_Value'])
-        cursor.execute(sql)
-        iterations+=1
-        if iterations%10000==0:
-            print(str(round(iterations/cities_df.shape[0]*100,2))+'% of master complete.')
-    
+    with Bar('Processing master', max=cities_df.shape[0]) as bar:
+        for index, row in cities_df.iterrows():
+            sql = """INSERT INTO master
+            (year, state, cityID, questionID, data_type, low_con, high_con, average) 
+            VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}')
+            """.format(row['Year'],  row['StateAbbr'], row['CityFIPS'], 
+            row['MeasureId'],  row['Data_Value_Type'], row['Low_Confidence_Limit'], row['High_Confidence_Limit'], 
+            row['Data_Value'])
+            cursor.execute(sql)
+            iterations+=1
+            bar.next()
+            #if iterations%10000==0:
+            #    print(str(round(iterations/cities_df.shape[0]*100,2))+'% of master complete.')
+            
     print('master insertions complete.')
     
 cursor.close()
