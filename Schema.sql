@@ -34,13 +34,6 @@ CREATE TABLE census(
 	PRIMARY KEY(year, state)
 );
 
-CREATE TABLE answer_confidence(
-	questionID varchar(255) PRIMARY KEY,
-	low_con int,
-	high_con int,
-	value int
-);
-
 CREATE TABLE survey_categories(
 	ID varchar(255) PRIMARY KEY,
 	category varchar(255)
@@ -59,9 +52,8 @@ CREATE TABLE master(
 	state char(2) REFERENCES state(stateAbbr),
 	cityID bigInt REFERENCES city_state(cityID),
 	questionID varchar(255) REFERENCES question_data(questionID),
-	data_type char(3),
+	data_type varchar(31),
 	low_con double precision,
 	high_con double precision,
-	average double precision,
-	locationBool boolean
+	average double precision
 );
