@@ -10,7 +10,16 @@ import pandas as pd
 import psycopg2
 import psycopg2.extras
 from psycopg2 import IntegrityError
-import sys
+import argparse
+#import sys
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-c", "--csv-path",action="store",dest="csv", default="/500_Cities__Local_Data_for_Better_Health__2018_release.csv"
+                    , help="Path of your 500 cities dataset")
+parser.add_argument("-s", "--sql-path",action="store", dest="sql", default="/Schema.sql", 
+                    help="Path of your sql file")
+
+args = parser.parse_args()
 
 conn_string = "host='localhost' dbname='health' user='health' password='health'"
 
@@ -18,10 +27,10 @@ conn = psycopg2.connect(conn_string)
 cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 conn.autocommit = True
 
-cursor.execute(open("Schema.sql", "r").read())
+cursor.execute(open(args.sql,"r").read())
 conn.autocommit = True
 sql = ""
-with open('500_Cities__Local_Data_for_Better_Health__2018_release.csv') as csv_file:
+with open(args.csv) as csv_file:
     #Relevant Features
     cities_df = pd.read_csv(csv_file, usecols=['Year','StateDesc', 'StateAbbr','CityName', 'CityFIPS','PopulationCount','Category',
                                                'CategoryID', 'MeasureId', 'Measure','Short_Question_Text', 'Data_Value_Type',
@@ -36,19 +45,18 @@ with open('500_Cities__Local_Data_for_Better_Health__2018_release.csv') as csv_f
     
     #CityState: Dropped repeats as we only need one instance of each city.
     city_state = cities_df.loc[:, ['CityFIPS', 'CityName', 'StateAbbr']].drop_duplicates('CityFIPS')
-    #city_state = city_state.dropna()
-    #city_state.CityFIPS = city_state.CityFIPS.astype(int)
-    #city_state.CityName = city_state.CityName.apply(lambda x: x.replace("'",""))
     
     #Census: Used groupby to aggregate by state and year, summing city populations
     #Not sure how accurate this data would be for us.
     census = cities_df.loc[:, ['Year', 'StateAbbr', 'PopulationCount']].groupby(['Year', 'StateAbbr']).sum()
     
-    #Survey Categories: dropped duplicates just cuz
+    #Survey Categories
     survey_categories = cities_df.loc[:,['CategoryID','Category']].drop_duplicates('CategoryID')
     
+    #Question data
     question_data = cities_df.loc[:,['MeasureId','Measure','CategoryID','Short_Question_Text' ]].drop_duplicates('MeasureId')
     
+    #Sequential Data insertions
     for index, row in state.iterrows():
         sql = """INSERT INTO state (stateAbbr, stateName) 
         VALUES ('{0}', '{1}')
@@ -58,6 +66,8 @@ with open('500_Cities__Local_Data_for_Better_Health__2018_release.csv') as csv_f
         except IntegrityError:
             print("Integrity Error: Key {0} already exists".format(row['StateAbbr']))
     
+    print('State insertions complete.')
+    
     for index, row in city_state.iterrows():
         sql = """INSERT INTO city_state (cityID, city, state)
         VALUES ('{0}', '{1}', '{2}')
@@ -66,7 +76,9 @@ with open('500_Cities__Local_Data_for_Better_Health__2018_release.csv') as csv_f
             cursor.execute(sql)
         except IntegrityError:
             print("Integrity Error: Key {0} already exists".format(row['CityFIPS']))
-     
+    
+    print('city_state insertions complete.')
+    
     for index, row in census.iterrows():
         sql = """
         INSERT INTO census (year, state, population) 
@@ -77,6 +89,8 @@ with open('500_Cities__Local_Data_for_Better_Health__2018_release.csv') as csv_f
         except IntegrityError:
             print("Integrity Error: Key ({0},{1}) already exists".format(index[0],index[1]))
     
+    print('census insertions complete.')
+    
     for index, row in survey_categories.iterrows():
         sql = """INSERT INTO survey_categories (ID, category) 
         VALUES ('{0}', '{1}')
@@ -85,6 +99,8 @@ with open('500_Cities__Local_Data_for_Better_Health__2018_release.csv') as csv_f
             cursor.execute(sql)
         except IntegrityError:
             print("Integrity Error: Key {0} already exists".format(row['CategoryID']))
+    
+    print('survey_categories insertions complete.')
     
     for index, row in question_data.iterrows():
         sql = """INSERT INTO question_data (questionID, question, categoryID, topic) 
@@ -95,6 +111,8 @@ with open('500_Cities__Local_Data_for_Better_Health__2018_release.csv') as csv_f
         except IntegrityError:
             print("Integrity Error: Key {0} already exists".format(row['MeasureId']))
     
+    print('question_data insertions complete.')
+    
     for index, row in cities_df.iterrows():
         sql = """INSERT INTO master
         (year, state, cityID, questionID, data_type, low_con, high_con, average) 
@@ -103,6 +121,10 @@ with open('500_Cities__Local_Data_for_Better_Health__2018_release.csv') as csv_f
         row['MeasureId'],  row['Data_Value_Type'], row['Low_Confidence_Limit'], row['High_Confidence_Limit'], 
         row['Data_Value'])
         cursor.execute(sql)
+        if index%10000==0:
+            print(str(round(index/cities_df.shape[0]*100,2))+'% of master complete.')
     
-
+    print('master insertions complete.')
+    
 cursor.close()
+print('Successfully closed cursor connection.')
