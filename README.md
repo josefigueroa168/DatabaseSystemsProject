@@ -3,11 +3,8 @@
 Project Contributions by:
 
  * Jose Figueroa (figuej3) - figuej3@rpi.edu
-
  * Matthew Garber (garbem4) - garbem4@rpi.edu 
-
  * Andrew Gaudet (gaudea) - gaudea@rpi.edu 
-
  * Eileen Yao (yaoe) - yaoe@rpi.edu 
  
 # Load Data Cities
