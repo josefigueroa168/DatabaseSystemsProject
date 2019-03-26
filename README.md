@@ -31,6 +31,6 @@ Load_data.py now completely parses 500_cities.csv and healthy_aging.csv into hea
 * If either the CSV or SQL file are not in the same directory, run:
   * `python load_data.py -c /path/to/csv -s /path/to/schema`
 
-<img src="https://raw.githubusercontent.com/josefigueroa168/DatabaseSystemsProject/master/static-images/Screen%20Shot%202019-03-22%20at%203.55.35%20PM.png?token=AYHRklUVrvDzlnNPOXl-5Sk9bj37tB3Vks5cnnjpwA%3D%3D" alt="example screenshot">
+<img src="https://raw.githubusercontent.com/josefigueroa168/DatabaseSystemsProject/master/static-images/Screen%20Shot%202019-03-26%20at%206.48.28%20PM.png?token=AYHRksgn-R2reswzzr-RkhnQHkSAnCyNks5co-eLwA%3D%3D" alt="example screenshot">
 
 load_data.py is verbose and will alert you when each insert is complete.
