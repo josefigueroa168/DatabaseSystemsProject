@@ -10,9 +10,9 @@ Project Contributions by:
 # Setup
 
 Requirements:
- * (Postgres)[https://www.postgresql.org/]
+ * [Postgres](https://www.postgresql.org/)
  * Python v 3.4+
- * (Anaconda)[https://www.anaconda.com/]
+ * [Anaconda](https://www.anaconda.com/)
    * Or just the pandas, psycopg2 libraries
  * Progress library `pip install progress`
 
