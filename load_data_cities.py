@@ -10,34 +10,15 @@ schema provided on Schema.sql.
 """
 
 import pandas as pd
-import psycopg2
-import psycopg2.extras
 from psycopg2 import IntegrityError
-import argparse
 from progress.bar import Bar
 
 
-def run():
-    #Setup of command line interactions
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-c", "--csv-path",action="store",dest="csv", default="500_Cities__Local_Data_for_Better_Health__2018_release.csv"
-                        , help="Path of your 500 cities dataset")
-    parser.add_argument("-s", "--sql-path",action="store", dest="sql", default="Schema.sql", 
-                        help="Path of your sql file")
-    args = parser.parse_args()
-
-    #Setup of connection and cursor object, using generic 'health' user
-    conn_string = "host='localhost' dbname='health' user='health' password='health'"
-    conn = psycopg2.connect(conn_string)
-    cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    conn.autocommit = True
-
-    #Implement schema setup
-    cursor.execute(open(args.sql,"r").read())
+def run(args, cursor):
     sql = ""
-
+    filename = args.csv + "/500_Cities__Local_Data_for_Better_Health__2018_release.csv"
     #Begin cleanup and parse
-    with open(args.csv) as csv_file:
+    with open(filename) as csv_file:
         #Relevant Features
         cities_df = pd.read_csv(csv_file, usecols=['Year','StateDesc', 'StateAbbr','CityName', 'CityFIPS','PopulationCount','Category',
                                                    'CategoryID', 'MeasureId', 'Measure','Short_Question_Text', 'Data_Value_Type',
@@ -136,6 +117,3 @@ def run():
                 #    print(str(round(iterations/cities_df.shape[0]*100,2))+'% of master complete.')
                 
         print('master insertions complete.')
-        
-    cursor.close()
-    print('Successfully closed cursor connection.')
