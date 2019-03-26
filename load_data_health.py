@@ -16,5 +16,5 @@ def run(args, cursor):
             if state in ('SOU', 'NRE', 'WEST', 'MDW', 'US') or len(state) > 2:
                 continue
             sql = "INSERT INTO state_health (year, disability_type, state, age_group) VALUES ('{}', '{}', '{}', '{}');".format(year, disability, state, age)
-            print('state_health insertions complete.')
             cursor.execute(sql)
+        print('state_health insertions complete.')
