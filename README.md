@@ -17,8 +17,11 @@ Requirements:
  * Progress library `pip install progress`
 
 Setup.py creates the user 'health' and the database 'health' where the program will create relations and execute query. If you have the default postgres superuser you can simply run:
+
 `python Setup.py`
+
 If you have a different superuser, credentials or database, run the following:
+
 `python Setup.py -u username -p password -d database`
 
 
