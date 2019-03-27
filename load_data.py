@@ -1,7 +1,13 @@
+"""
+Data loading script for Database Systems. To both create health user and
+run data scripts, uncomment #import Setup, #Setup.run(). 
+Contributers: Jose Figueroa, Matthew Garber, Eileen Yao, Andrew Gaudet
+"""
+
 import argparse
-import Setup
 import psycopg2
 import psycopg2.extras
+#import Setup
 import load_data_cities
 import load_data_health
 
@@ -22,11 +28,18 @@ def create_cursor():
     conn.autocommit = True
     return conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
+#Setup.run()
+#print('Successfully created "health" user');
 args = com_line()
 cursor = create_cursor()
 cursor.execute(open(args.sql,"r").read())
+
+print('Beginning 500 cities survey.')
 load_data_cities.run(args, cursor)
+print('500 cities survey complete.')
+print('Beginning health aging survey.')
 load_data_health.run(args, cursor)
+print('Health aging survey complete.')
 
 cursor.close()
 print('Successfully closed cursor connection.')

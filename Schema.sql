@@ -8,23 +8,17 @@ DROP TABLE IF EXISTS question_data CASCADE;
 DROP TABLE IF EXISTS master CASCADE;
 
 
-CREATE TABLE state_health(
-	year bigint,
-	disability_type varchar(255),
-	state char(2),
-	age_group varchar(255)
+
+-- Parsed --
+CREATE TABLE state(
+	stateAbbr varchar(2) PRIMARY KEY,
+	stateName varchar(255)
 );
 
 CREATE TABLE city_state(
 	cityID bigint PRIMARY KEY,
 	city varchar(255),
 	state char(2)
-);
-
--- Parsed --
-CREATE TABLE state(
-	stateAbbr varchar(2) PRIMARY KEY,
-	stateName varchar(255)
 );
 
 CREATE TABLE census(
@@ -38,6 +32,13 @@ CREATE TABLE survey_categories(
 	ID varchar(255) PRIMARY KEY,
 	category varchar(255)
 );
+
+--CREATE TABLE state_health(
+--	year bigint,
+--	disability_type varchar(255) REFERENCES survey_categories(ID),
+--	state char(2) REFERENCES state(stateAbbr), 
+--	age_group varchar(255)
+--);
 
 CREATE TABLE question_data(
 	questionID varchar(255) PRIMARY KEY,
