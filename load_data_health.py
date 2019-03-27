@@ -67,6 +67,7 @@ def run(args, cursor):
         with Bar('Processing master', max=master.shape[0]) as bar:
             for index, row in master.iterrows():
                 if row["LocationAbbr"] in ('SOU', 'NRE', 'WEST', 'MDW', 'US') or len(row["LocationAbbr"]) > 2:
+                    bar.next()
                     continue
                 sql = """INSERT INTO master
                 (year, state, questionID, data_type, low_con, high_con, average) 
