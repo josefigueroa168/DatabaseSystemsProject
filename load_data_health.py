@@ -25,7 +25,7 @@ def run(args, cursor):
             try:
                 cursor.execute(sql)
             except IntegrityError:
-                print("Integrity Error: Key {0} already exists".format(row['StateAbbr']))
+                print("Integrity Error: Key {0} already exists".format(row['LocationAbbr']))
         
         print('State insertions complete.')
         
@@ -49,7 +49,7 @@ def run(args, cursor):
             try:
                 cursor.execute(sql)
             except IntegrityError:
-                print("Integrity Error: Key {0} already exists".format(row['CategoryID']))
+                print("Integrity Error: Key {0} already exists".format(row['ClassID']))
         
         print('survey_categories insertions complete.')
         
@@ -60,7 +60,7 @@ def run(args, cursor):
             try:
                 cursor.execute(sql)
             except IntegrityError:
-                print("Integrity Error: Key {0} already exists".format(row['MeasureId']))
+                print("Integrity Error: Key {0} already exists".format(row['questionID']))
         
         print('question_data insertions complete.')
         
