@@ -16,7 +16,7 @@ from progress.bar import Bar
 
 def run(args, cursor):
     sql = ""
-    filename = args.csv + "/500_Cities__Local_Data_for_Better_Health__2018_release.csv"
+    filename = args.csv + "500_Cities__Local_Data_for_Better_Health__2018_release.csv"
     #Begin cleanup and parse
     with open(filename) as csv_file:
         #Relevant Features

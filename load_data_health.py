@@ -3,7 +3,7 @@ from progress.bar import Bar
 from psycopg2 import IntegrityError
 
 def run(args, cursor):
-    filename = args.csv+'/Healthy_Aging_Data.csv'
+    filename = args.csv+'Healthy_Aging_Data.csv'
     with open(filename) as csv_file:
         health = pd.read_csv(csv_file, usecols=["YearStart", "LocationAbbr", "LocationDesc", "Class", "Topic", "Question",
                                                 "Data_Value_Type", "Data_Value", "Low_Confidence_Limit", "High_Confidence_Limit",

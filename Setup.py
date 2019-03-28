@@ -2,7 +2,7 @@ import psycopg2
 import psycopg2.extras
 import argparse
 
-def __main__():
+def run():
     parser = argparse.ArgumentParser()
     parser.add_argument("-u", "--username",action="store",dest="un", default="postgres"
                         , help="Username of a postgres superuser. Default value is postgres.")
@@ -22,6 +22,6 @@ def __main__():
     cursor.execute("GRANT ALL PRIVILEGES ON DATABASE health TO health;")
     cursor.close()
     print('Successfully closed cursor.')
-    
+
 if (__name__=="__main__"):
-    __main__()
+    run()
