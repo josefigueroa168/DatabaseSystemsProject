@@ -1,0 +1,7 @@
+https://data.cdc.gov/api/views/6vp6-wxuq/rows.csv?accessType=DOWNLOAD
+https://chronicdata.cdc.gov/api/views/hfr9-rurv/rows.csv?accessType=DOWNLOAD
+
+For organization you only need to run load_data.py but some of the work was divided 
+into other python and sql files including load_data_cities.py load_data_health.py Setup.py
+
+In addition to that the README states that a couple of other libraries were used including pandas, psycopg2, progress, and postgres
