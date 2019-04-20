@@ -11,3 +11,16 @@ class database(object):
         self.cursor.execute("select * from census where year = %s;", [year])
         records = self.cursor.fetchall()
         return records
+
+    def run_join_on_question(self):
+        self.cursor.execute("select * from master, question_data where master.questionid = question_data.questionid;")
+
+    def search_us_by_disease_stats(self, disease):
+        query = '''
+        select state, avg(average) from master
+        where questionid ILIKE %s
+        group by state;
+        '''
+        self.cursor.execute(query, [disease])
+        records = self.cursor.fetchall()
+        return records
