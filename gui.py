@@ -26,24 +26,19 @@ def plot2(data):
     plt.show()
     
 def plot3(data):
-    data.loc[:,2] = data.loc[:,2].apply(pd.to_numeric)
-    print(data.head)
-    print(data.loc[0,:][0]) #Gives state
-    print(data.loc[0,:][1])
     q_x = data.loc[0,:][1]
     q_y = data.loc[1,:][1]
-    #state = {}
     state_name = []
     state_x = []
     state_y = []
-    print(data.shape)
-    for i in range(0, data.shape[0], 2):
-        #state[data.loc[i,:][0]] = [data.loc[i,:][2], data.loc[i+1,:][2]]
+    for i in range(0, data.shape[0]-1, 2):
         state_name.append(data.loc[i,:][0])
         state_x.append(data.loc[i,:][2])
         state_y.append(data.loc[i+1,:][2])
     fig, ax = plt.subplots()
     ax.scatter(state_x, state_y)
     for i in range(len(state_name)):
-        ax.annotate(state_name[i], state_x[i], state_y[i])
+        ax.annotate(state_name[i], (state_x[i], state_y[i]))
+    ax.set_xlabel(q_x)
+    ax.set_ylabel(q_y)
     plt.show()
