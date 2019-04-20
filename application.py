@@ -21,6 +21,7 @@ if __name__ == "__main__":
                     data[rec[i][0]] = rec[i][1]
                 gui.plot1(data, disease)
         elif query_type == 2:
+            db.quit()
             break
         
         

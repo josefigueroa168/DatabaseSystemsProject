@@ -2,6 +2,9 @@ import psycopg2
 import psycopg2.extras
 
 class database(object):
+    """
+        A database interacting object that executes predifined queries with additional user input.
+    """
     def __init__(self):
         conn_string = "host='localhost' dbname='health' user='health' password='health'"
         self.conn = psycopg2.connect(conn_string)
@@ -27,3 +30,6 @@ class database(object):
         self.cursor.execute(query, [disease])
         records = self.cursor.fetchall()
         return records
+
+    def quit(self):
+        self.cursor.close()
