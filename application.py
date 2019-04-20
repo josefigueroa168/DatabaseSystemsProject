@@ -39,12 +39,13 @@ if __name__ == "__main__":
             for i in range(len(rec)):
                 data[rec[i][1]] = rec[i][0]
             gui.plot2(data)      
-            
-        if query_type == CORRELATION:
-            question = input("Enter question code: ")
-            rec = db.insurance_correlation(question)
-            if(len(rec) == 0):
-                print('No results found, question code not present.')
+
+
+#        elif query_type == CORRELATION:
+#            question = input("Enter question code: ")
+#            rec = db.insurance_correlation(question)
+#            if(len(rec) == 0):
+#                print('No results found, question code not present.')
 
         elif query_type == HELP:
             print('1) get category codes')
