@@ -47,6 +47,7 @@ if __name__ == "__main__":
                     print('Code: {} -> English: {}'.format(rec[i][0], rec[i][1]))
                 
         elif query_type == QUIT:
+            db.quit()
             break
         
         
