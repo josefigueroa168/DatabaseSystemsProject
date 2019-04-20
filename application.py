@@ -8,7 +8,8 @@ if __name__ == "__main__":
 
     while True:
         print("1) Search the US by disease code")
-        print("2) close the US health database")
+        print("3) Insurance Correlation:")
+        print("4) Close the US health database")
         query_type = int(input("Enter query type: "))
         if query_type == 1:
             disease = input("Enter disease code: ")
@@ -20,7 +21,13 @@ if __name__ == "__main__":
                 for i in range(len(rec)):
                     data[rec[i][0]] = rec[i][1]
                 gui.plot1(data, disease)
-        elif query_type == 2:
+        if query_type == 3:
+            question = input("Enter question code: ")
+            rec = db.insurance_correlation(question)
+            if(len(rec) == 0):
+                print('No results found, question code not present.')
+            
+        elif query_type == 4:
             db.quit()
             break
         

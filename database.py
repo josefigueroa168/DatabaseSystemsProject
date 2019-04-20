@@ -30,6 +30,25 @@ class database(object):
         self.cursor.execute(query, [disease])
         records = self.cursor.fetchall()
         return records
-
+    
+    def insurance_correlation(self, question):
+        """
+        Pulls a join between question_data and master and maps correlation in each state between uninsured and elder health
+        The goal is to observe correlations between insurance and health.
+        @param question is a valid number from Q01-Q42
+        """
+        query = '''
+            SELECT "state", question, AVG(average) 
+            FROM master  
+            JOIN question_data qd ON master.questionid=qd.questionid
+            AND (master.questionid='ACCESS2' OR master.questionid='%s)
+            GROUP BY ("state", question)
+            ORDER BY "state";
+            '''
+        self.cursor.execute(query, [question])
+        records = self.cursor.fetchall()
+        return records
+        
+        
     def quit(self):
         self.cursor.close()
