@@ -55,7 +55,7 @@ class database(object):
             SELECT "state", question, AVG(average) 
             FROM master  
             JOIN question_data qd ON master.questionid=qd.questionid
-            AND (master.questionid='ACCESS2' OR master.questionid='%s)
+            AND (master.questionid='ACCESS2' OR master.questionid=%s)
             GROUP BY ("state", question)
             ORDER BY "state";
             '''
