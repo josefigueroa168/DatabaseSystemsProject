@@ -16,6 +16,9 @@ class database(object):
         self.cursor.execute("select * from master, question_data where master.questionid = question_data.questionid;")
 
     def search_us_by_disease_stats(self, disease):
+        '''
+        valid disease: stroke, obesity, cholscreen, dental, cancer, kidney, mhlth
+        '''
         query = '''
         select state, avg(average) from master
         where questionid ILIKE %s
