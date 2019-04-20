@@ -16,7 +16,7 @@ if __name__ == "__main__":
     while True:
         print("{}) Search the US by disease code".format(US_DISEASE_SEARCH))
         print("{}) Search by states per category".format(STATE_CATEGORY))
-
+        print("{}) See correlation between insurance and elder health.".format(CORRELATION))
         print("{}) help".format(HELP))
         print("{}) close the US health database".format(QUIT))
         query_type = int(input("Enter query type: "))
