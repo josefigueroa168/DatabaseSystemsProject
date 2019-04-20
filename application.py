@@ -6,6 +6,7 @@ if __name__ == "__main__":
 
     US_DISEASE_SEARCH = 1
     SOMETHING = 2
+    CORRELATION = 3
     HELP = 8
     QUIT = 9
 
@@ -27,7 +28,8 @@ if __name__ == "__main__":
                 question = rec[0][2]
                 for i in range(len(rec)):
                     data[rec[i][0]] = rec[i][1]
-                gui.plot1(data, question)
+                gui.plot1(data, disease)
+       
         elif query_type == SOMETHING:
             category_id = input('Enter catagory type: ')
             year = input('Enter year: ')
@@ -36,7 +38,14 @@ if __name__ == "__main__":
             data = dict()
             for i in range(len(rec)):
                 data[rec[i][1]] = rec[i][0]
-            gui.plot2(data)
+            gui.plot2(data)      
+
+
+#        elif query_type == CORRELATION:
+#            question = input("Enter question code: ")
+#            rec = db.insurance_correlation(question)
+#            if(len(rec) == 0):
+#                print('No results found, question code not present.')
 
         elif query_type == HELP:
             print('1) get category codes')
