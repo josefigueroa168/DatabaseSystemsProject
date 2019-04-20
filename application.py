@@ -1,5 +1,6 @@
 import database
 import gui
+import pandas as pd
 
 if __name__ == "__main__":
     db = database.database()
@@ -15,6 +16,7 @@ if __name__ == "__main__":
     while True:
         print("{}) Search the US by disease code".format(US_DISEASE_SEARCH))
         print("{}) ".format(SOMETHING))
+        print("{}) See correlation between insurance and elder health.".format(CORRELATION))
         print("{}) help".format(HELP))
         print("{}) close the US health database".format(QUIT))
         query_type = int(input("Enter query type: "))
@@ -41,12 +43,14 @@ if __name__ == "__main__":
             gui.plot2(data)      
 
 
-#        elif query_type == CORRELATION:
-#            question = input("Enter question code: ")
-#            rec = db.insurance_correlation(question)
-#            if(len(rec) == 0):
-#                print('No results found, question code not present.')
-
+        elif query_type == CORRELATION:
+            question = input("Enter question code: ")
+            rec = db.insurance_correlation(question)
+            if(len(rec) == 0):
+                print('No results found, question code not present.')
+            else:
+                gui.plot3(pd.DataFrame(rec))
+                
         elif query_type == HELP:
             print('1) get category codes')
             command = int(input('Enter command: '))
