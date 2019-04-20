@@ -16,14 +16,13 @@ class database(object):
         self.cursor.execute("select * from master, question_data where master.questionid = question_data.questionid;")
 
     def search_us_by_disease_stats(self, disease):
-        '''
-        valid disease: stroke, obesity, cholscreen, dental, cancer, kidney, mhlth
-        '''
         query = '''
-        select state, avg(average) from master
+        select state, avg(average), question from master, 
+            (select question from question_data
+            where questionid ILIKE %s) questiontxt
         where questionid ILIKE %s
-        group by state;
+        group by state, question;
         '''
-        self.cursor.execute(query, [disease])
+        self.cursor.execute(query, [disease, disease])
         records = self.cursor.fetchall()
         return records

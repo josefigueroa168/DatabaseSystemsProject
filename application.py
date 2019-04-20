@@ -17,9 +17,10 @@ if __name__ == "__main__":
                 print('No results found, disease code not present')
             else:
                 data = dict()
+                question = rec[0][2]
                 for i in range(len(rec)):
                     data[rec[i][0]] = rec[i][1]
-                gui.plot1(data, disease)
+                gui.plot1(data, question)
         elif query_type == 2:
             break
         
