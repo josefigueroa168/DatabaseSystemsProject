@@ -5,7 +5,7 @@ if __name__ == "__main__":
     db = database.database()
 
     US_DISEASE_SEARCH = 1
-    SOMETHING = 2
+    STATE_CATEGORY = 2
     CORRELATION = 3
     HELP = 8
     QUIT = 9
@@ -14,7 +14,7 @@ if __name__ == "__main__":
 
     while True:
         print("{}) Search the US by disease code".format(US_DISEASE_SEARCH))
-        print("{}) ".format(SOMETHING))
+        print("{}) Search by states per category".format(STATE_CATEGORY))
         print("{}) help".format(HELP))
         print("{}) close the US health database".format(QUIT))
         query_type = int(input("Enter query type: "))
@@ -30,7 +30,7 @@ if __name__ == "__main__":
                     data[rec[i][0]] = rec[i][1]
                 gui.plot1(data, disease)
        
-        elif query_type == SOMETHING:
+        elif query_type == STATE_CATEGORY:
             category_id = input('Enter catagory type: ')
             year = input('Enter year: ')
             state = input('Enter state: ')
@@ -38,7 +38,8 @@ if __name__ == "__main__":
             data = dict()
             for i in range(len(rec)):
                 data[rec[i][1]] = rec[i][0]
-            gui.plot2(data)      
+            for key in data.keys():
+                gui.binaryPieChart(key, data[key])   
 
 
 #        elif query_type == CORRELATION:
