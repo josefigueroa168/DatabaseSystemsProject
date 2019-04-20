@@ -13,3 +13,13 @@ def plot1(data, question):
     # Add a vertical line, here we set the style in the function call
     ax.axvline(group_mean, ls='--', color='r')
     plt.show()
+
+def plot2(data):
+    group_data = list(data.values())
+    group_names = list(data.keys())
+    fig, ax = plt.subplots(figsize=(20, 10))
+    ax.barh(group_names, group_data)
+    plt.style.use('fivethirtyeight')
+    ax.set(ylabel='Percent yes')
+    # Add a vertical line, here we set the style in the function call
+    plt.show()

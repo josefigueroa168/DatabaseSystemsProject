@@ -15,6 +15,21 @@ class database(object):
     def run_join_on_question(self):
         self.cursor.execute("select * from master, question_data where master.questionid = question_data.questionid;")
 
+    def get_category_ids(self):
+        self.cursor.execute("select * from survey_categories;")
+        records = self.cursor.fetchall()
+        return records
+
+    def search_by_catagory_type_state(self, catagoryid, year, state):
+        query = '''
+        select avg(average), question from question_data, survey_categories, master
+        where question_data.categoryid = survey_categories.id and categoryid ILIKE %s and master.questionid = question_data.questionid and year = %s and state ILIKE %s
+        group by question;
+        '''
+        self.cursor.execute(query, [catagoryid, year, state])
+        records = self.cursor.fetchall()
+        return records
+
     def search_us_by_disease_stats(self, disease):
         query = '''
         select state, avg(average), question from master, 
