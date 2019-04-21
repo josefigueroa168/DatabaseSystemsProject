@@ -23,6 +23,11 @@ class database(object):
         records = self.cursor.fetchall()
         return records
 
+    def get_question_ids(self):
+        self.cursor.execute("select questionid, question from question_data;")
+        records = self.cursor.fetchall()
+        return records
+        
     def search_by_catagory_type_state(self, catagoryid, year, state):
         query = '''
         select avg(average), question from question_data, survey_categories, master

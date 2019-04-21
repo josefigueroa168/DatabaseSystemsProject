@@ -16,7 +16,7 @@ if __name__ == "__main__":
     while True:
         print("{}) Search the US by disease code".format(US_DISEASE_SEARCH))
         print("{}) Search by states per category".format(STATE_CATEGORY))
-
+        print("{}) ".format(CORRELATION))
         print("{}) help".format(HELP))
         print("{}) close the US health database".format(QUIT))
         query_type = int(input("Enter query type: "))
@@ -54,12 +54,16 @@ if __name__ == "__main__":
                 
         elif query_type == HELP:
             print('1) get category codes')
+            print('2) get question codes')
             command = int(input('Enter command: '))
             if command == 1:
                 rec = db.get_category_ids()
                 for i in range(len(rec)):
                     print('Code: {} -> English: {}'.format(rec[i][0], rec[i][1]))
-                
+            if command == 2:
+                rec = db.get_question_ids()
+                for i in range(len(rec)):
+                    print('Code: {} -> English: {}'.format(rec[i][0], rec[i][1]))   
         elif query_type == QUIT:
             db.quit()
             break
