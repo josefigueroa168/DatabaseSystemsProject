@@ -47,7 +47,7 @@ if __name__ == "__main__":
         elif query_type == CORRELATION:
             question = input("Enter question code: ")
             rec = db.insurance_correlation(question)
-            if(len(rec) == 0):
+            if(len(rec) <= 50):
                 print('No results found, question code not present.')
             else:
                 gui.plot3(pd.DataFrame(rec))
