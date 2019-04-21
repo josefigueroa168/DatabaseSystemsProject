@@ -41,7 +41,7 @@ def plot3(data):
     state_name = []
     state_x = []
     state_y = []
-    for i in range(0, data.shape[0]-1, 2):
+    for i in range(0, data.shape[0], 2):
         state_name.append(data.loc[i,:][0])
         state_x.append(data.loc[i,:][2])
         state_y.append(data.loc[i+1,:][2])

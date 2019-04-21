@@ -55,14 +55,28 @@ class database(object):
             SELECT "state", question, AVG(average) 
             FROM master  
             JOIN question_data qd ON master.questionid=qd.questionid
-            AND (master.questionid='ACCESS2' OR master.questionid=%s)
+            WHERE NOT ("state"='DC') 
+            AND NOT("state"='PR')
+            AND NOT("state"='VI')
+            AND NOT("state"='GU')
+            AND (master.questionid='ACCESS2' OR master.questionid= %s)
             GROUP BY ("state", question)
-            ORDER BY "state";
+            ORDER BY STATE DESC;
             '''
         self.cursor.execute(query, [question])
         records = self.cursor.fetchall()
         return records
-        
-        
+    
+    def getQuestionID(self):
+        query = '''
+        SELECT questionid, question
+        FROM question_data
+        WHERE questionid LIKE 'Q%'
+        ORDER BY questionid
+        '''
+        self.cursor.execute(query)
+        records = self.cursor.fetchall()
+        return records
+    
     def quit(self):
         self.cursor.close()

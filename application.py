@@ -17,8 +17,8 @@ if __name__ == "__main__":
         print("{}) Search the US by disease code".format(US_DISEASE_SEARCH))
         print("{}) Search by states per category".format(STATE_CATEGORY))
         print("{}) See correlation between insurance and elder health.".format(CORRELATION))
-        print("{}) help".format(HELP))
-        print("{}) close the US health database".format(QUIT))
+        print("{}) Help".format(HELP))
+        print("{}) Close the US health database".format(QUIT))
         query_type = int(input("Enter query type: "))
         if query_type == US_DISEASE_SEARCH:
             disease = input("Enter disease code: ")
@@ -53,13 +53,18 @@ if __name__ == "__main__":
                 gui.plot3(pd.DataFrame(rec))
                 
         elif query_type == HELP:
-            print('1) get category codes')
+            print('1) Get category codes.')
+            print('3) Get question codes.')
             command = int(input('Enter command: '))
             if command == 1:
                 rec = db.get_category_ids()
                 for i in range(len(rec)):
                     print('Code: {} -> English: {}'.format(rec[i][0], rec[i][1]))
-                
+            elif command ==3:
+                rec = db.getQuestionID()
+                for i in range(len(rec)):
+                    print('QuestionID: {} -> English: {}'.format(rec[i][0], rec[i][1]))
+                print()
         elif query_type == QUIT:
             db.quit()
             break
