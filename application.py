@@ -19,7 +19,12 @@ if __name__ == "__main__":
         print("{}) See correlation between insurance and elder health.".format(CORRELATION))
         print("{}) Help".format(HELP))
         print("{}) Close the US health database".format(QUIT))
-        query_type = int(input("Enter query type: "))
+        query=9
+        try:
+            query_type = int(input("Enter query type: "))
+        except ValueError:
+            print("Invalid input, numeric query type only.")
+            continue
         if query_type == US_DISEASE_SEARCH:
             disease = input("Enter disease code: ")
             rec = db.search_us_by_disease_stats(disease)
