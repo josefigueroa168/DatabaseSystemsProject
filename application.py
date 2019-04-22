@@ -19,7 +19,6 @@ if __name__ == "__main__":
         print("{}) See correlation between insurance and elder health.".format(CORRELATION))
         print("{}) Help".format(HELP))
         print("{}) Close the US health database".format(QUIT))
-        query=9
         try:
             query_type = int(input("Enter query type: "))
         except ValueError:
@@ -71,6 +70,7 @@ if __name__ == "__main__":
                     print('QuestionID: {} -> English: {}'.format(rec[i][0], rec[i][1]))
                 print()
         elif query_type == QUIT:
+            print("Bye!")
             db.quit()
             break
         
