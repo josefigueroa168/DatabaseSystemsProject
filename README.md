@@ -13,7 +13,7 @@ Requirements:
  * [Postgres](https://www.postgresql.org/)
  * Python v 3.4+
  * [Anaconda](https://www.anaconda.com/)
-   * Or just the pandas, psycopg2 libraries
+   * Or just the pandas, psycopg2, matplotlib, numpy libraries
  * Progress library `pip install progress`
 
 Setup.py creates the user 'health' and the database 'health' where the program will create relations and execute query. If you have the default postgres superuser you can simply run:
@@ -34,6 +34,9 @@ Load_data.py now completely parses 500_cities.csv and healthy_aging.csv into hea
 * If either the CSV or SQL file are not in the same directory, run:
   * `python load_data.py -c /path/to/csv -s /path/to/schema`
 
-<img src="https://raw.githubusercontent.com/josefigueroa168/DatabaseSystemsProject/master/static-images/Screen%20Shot%202019-03-26%20at%206.48.28%20PM.png?token=AYHRksgn-R2reswzzr-RkhnQHkSAnCyNks5co-eLwA%3D%3D" alt="example screenshot">
-
 load_data.py is verbose and will alert you when each insert is complete.
+
+
+# Application
+
+To run queries on the database run: `python application.py`
