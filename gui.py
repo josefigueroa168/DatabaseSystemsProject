@@ -42,10 +42,16 @@ def plot3(data):
     state_name = []
     state_x = []
     state_y = []
-    for i in range(0, data.shape[0], 2):
+    if (data.shape[0] %2 == 1):
+        bound = data.shape[0] -1
+    else:
+        bound = data.shape[0]
+    for i in range(0, bound, 2):
         state_name.append(data.loc[i,:][0])
         state_x.append(data.loc[i,:][2])
         state_y.append(data.loc[i+1,:][2])
+
+
     fig, ax = plt.subplots()
     ax.scatter(state_x, state_y)
     for i in range(len(state_name)):
