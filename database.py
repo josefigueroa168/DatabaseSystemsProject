@@ -33,6 +33,14 @@ class database(object):
         records = self.cursor.fetchall()
         return records
 
+    def getDiseaseID(self):
+        query = '''
+        select questionid, question from question_data;
+        '''
+        self.cursor.execute(query)
+        records = self.cursor.fetchall()
+        return records
+
     def search_us_by_disease_stats(self, disease):
         query = '''
         select state, avg(average), question from master, 

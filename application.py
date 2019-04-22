@@ -58,12 +58,18 @@ if __name__ == "__main__":
                 
         elif query_type == HELP:
             print('1) Get category codes.')
+            print('2) Get disease codes')
             print('3) Get question codes.')
             command = int(input('Enter command: '))
             if command == 1:
                 rec = db.get_category_ids()
                 for i in range(len(rec)):
                     print('Code: {} -> English: {}'.format(rec[i][0], rec[i][1]))
+            elif command ==2:
+                rec = db.getDiseaseID()
+                for i in range(len(rec)):
+                    print('DiseaseID: {} -> English: {}'.format(rec[i][0], rec[i][1]))
+                print()
             elif command ==3:
                 rec = db.getQuestionID()
                 for i in range(len(rec)):
