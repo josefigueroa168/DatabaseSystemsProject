@@ -24,6 +24,7 @@ def binaryPieChart(key, val):
     labels = ['Yes', 'No']
     plt.pie(vals, labels=labels)
     plt.title(key)
+    plt.show()
     
 def plot2(data):
     group_data = list(data.values())
